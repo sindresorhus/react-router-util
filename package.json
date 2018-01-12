@@ -1,0 +1,53 @@
+{
+	"name": "react-router-util",
+	"version": "0.0.0",
+	"description": "Various useful utilities for working with React Router",
+	"license": "MIT",
+	"repository": "sindresorhus/react-router-util",
+	"author": {
+		"name": "Sindre Sorhus",
+		"email": "sindresorhus@gmail.com",
+		"url": "sindresorhus.com"
+	},
+	"engines": {
+		"node": ">=6"
+	},
+	"scripts": {
+		"test": "xo && ava"
+	},
+	"files": [
+		"index.js"
+	],
+	"keywords": [
+		"react",
+		"router",
+		"history",
+		"pushstate",
+		"navigate",
+		"routing",
+		"location",
+		"href",
+		"link",
+		"component",
+		"debug",
+		"util",
+		"utils",
+		"utilities",
+		"helper",
+		"helpers"
+	],
+	"devDependencies": {
+		"ava": "*",
+		"xo": "*"
+	},
+	"peerDependencies": {
+		"react": ">=16",
+		"react-router-dom": ">=4"
+	},
+	"xo": {
+		"rules": {
+			"import/no-unresolved": "off",
+			"import/no-extraneous-dependencies": "off"
+		}
+	}
+}
