@@ -52,13 +52,13 @@ A [`history`](https://github.com/ReactTraining/react-router/blob/master/packages
 
 Same as the official `<BrowserRouter>`, but with `history={history}` set to the above `history` singleton, so you can just import the singleton to access the router `history` object from outside the router.
 
-### `<CurrentRoute/>`
-
-React component that renders the pathname of the current route. For example: `/dashboard`.
-
 ### `<Debug/>`
 
 Unrendered React component that prints the `props` of the current route component to the console when not in production.
+
+### `<CurrentRoute/>`
+
+React component that renders the pathname of the current route. For example: `/dashboard`.
 
 ### `<RouteWithProps/>`
 
@@ -75,6 +75,32 @@ After:
 ```jsx
 <Route path="/unicorn" component={Unicorn} foo={'cake'} bar/>
 ```
+
+### `<ConditionalRoute/>`
+
+A conditional version of [`<Route/>`](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/Route.md). You pass it a `conditional` prop with a boolean. If it's truthy, either the given `trueComponent` will be rendered or it will redirect to `trueRedirectTo`. If it's falsy, either the given `falseComponent` will be rendered or it will redirect to `trueRedirectTo`. It accepts all the props `<Route/>` accepts except for `render`.
+
+Before:
+
+```jsx
+<Route path="/" exact render={() => (
+	isLoggedIn ? <MainView/> : <Redirect to="/login"/>
+)}/>
+```
+
+After:
+
+```jsx
+<ConditionalRoute
+	path="/"
+	exact
+	conditional={isLoggedIn}
+	trueComponent={MainView}
+	falseRedirectTo="/login"
+/>
+```
+
+It's a little bit more verbose, but declarative FTW.
 
 ### `<BackLink>`
 
