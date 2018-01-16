@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import {BrowserRouter as OriginalBrowserRouter, Route, withRouter} from 'react-router-dom';
+import {BrowserRouter as OriginalBrowserRouter, Route, Link, withRouter} from 'react-router-dom';
 import {createBrowserHistory} from 'history';
 
 export const history = createBrowserHistory();
@@ -27,12 +27,7 @@ class DebugComponent extends React.Component {
 }
 export const Debug = withRouter(DebugComponent);
 
-class CurrentRouteComponent extends React.Component {
-	render() {
-		return this.props.location.pathname;
-	}
-}
-export const CurrentRoute = withRouter(CurrentRouteComponent);
+export const CurrentRoute = withRouter(props => props.location.pathname);
 
 export const RouteWithProps = ({path, exact, strict, location, sensitive, component: Component, ...rest}) => (
 	<Route
@@ -44,3 +39,21 @@ export const RouteWithProps = ({path, exact, strict, location, sensitive, compon
 		render={props => <Component {...props} {...rest}/>}
 	/>
 );
+
+export const BackLink = withRouter(({history, children, ...rest}) => {
+	const navigate = event => {
+		event.preventDefault();
+		history.goBack();
+	};
+
+	return <Link to="" onClick={navigate} {...rest}>{children}</Link>;
+});
+
+export const ForwardLink = withRouter(({history, children, ...rest}) => {
+	const navigate = event => {
+		event.preventDefault();
+		history.goForward();
+	};
+
+	return <Link to="" onClick={navigate} {...rest}>{children}</Link>;
+});

@@ -76,6 +76,14 @@ After:
 <Route path="/unicorn" component={Unicorn} foo={'cake'} bar/>
 ```
 
+### `<BackLink>`
+
+Like [`<Link>`](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/api/Link.md), but navigates to the previous route in the history. Accepts any props `<Link>` supports except for `to`.
+
+### `<ForwardLink>`
+
+Like [`<Link>`](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/api/Link.md), but navigates to the next route in the history. Accepts any props `<Link>` supports except for `to`.
+
 
 ## License
 
