@@ -1,6 +1,6 @@
 # react-router-util [![Build Status](https://travis-ci.org/sindresorhus/react-router-util.svg?branch=master)](https://travis-ci.org/sindresorhus/react-router-util)
 
-> Various useful utilities for working with [React Router](https://github.com/ReactTraining/react-router)
+> Useful components and utilities for working with [React Router](https://github.com/ReactTraining/react-router)
 
 
 ## Install
@@ -74,6 +74,40 @@ After:
 
 ```jsx
 <Route path="/unicorn" component={Unicorn} foo={'cake'} bar/>
+```
+
+### `<AuthenticatedRoute/>`
+
+An authenticated version of [`<Route/>`](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/Route.md). You pass it an `isAuthenticated` prop with a boolean of whether it's authenticated. If it's truthy, it will render the given `component` or redirect to the given `redirectTo` path. If it's falsy, it will redirect to `/login` or `loginPath` if specified. It accepts all the props `<Route/>` accepts except for `render`. Additional props are passed to the `component`.
+
+Before:
+
+```jsx
+<Route path="/" exact render={props => (
+	isLoggedIn ? <MainView {...props}/> : <Redirect to="/login"/>
+)}/>
+```
+
+After:
+
+```jsx
+<AuthenticatedRoute
+	path="/"
+	exact
+	isAuthenticated={isLoggedIn}
+	component={MainView}
+/>
+```
+
+Another example:
+
+```jsx
+<AuthenticatedRoute
+	path="/admin"
+	isAuthenticated={isLoggedIn}
+	redirectTo="/admin/dashboard
+	loginPath="/admin/login"
+/>
 ```
 
 ### `<ConditionalRoute/>`

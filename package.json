@@ -1,7 +1,7 @@
 {
 	"name": "react-router-util",
 	"version": "0.2.0",
-	"description": "Various useful utilities for working with React Router",
+	"description": "Useful components and utilities for working with React Router",
 	"license": "MIT",
 	"repository": "sindresorhus/react-router-util",
 	"author": {
@@ -9,10 +9,10 @@
 		"email": "sindresorhus@gmail.com",
 		"url": "sindresorhus.com"
 	},
+	"main": "./dist/index.js",
 	"engines": {
 		"node": ">=6"
 	},
-	"main": "./dist/index.js",
 	"scripts": {
 		"build": "babel index.js --out-dir=dist",
 		"test": "xo && ava",

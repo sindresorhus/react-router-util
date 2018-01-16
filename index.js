@@ -1,6 +1,12 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import {BrowserRouter as OriginalBrowserRouter, Route, Link, withRouter} from 'react-router-dom';
+import {
+	BrowserRouter as OriginalBrowserRouter,
+	Route,
+	Redirect,
+	Link,
+	withRouter
+} from 'react-router-dom';
 import {createBrowserHistory} from 'history';
 
 export const history = createBrowserHistory();
@@ -39,6 +45,22 @@ export const RouteWithProps = ({path, exact, strict, location, sensitive, compon
 		render={props => <Component {...props} {...rest}/>}
 	/>
 );
+
+export const AuthenticatedRoute = ({
+	isAuthenticated,
+	redirectTo,
+	loginPath,
+	component: Component,
+	...rest
+}) => {
+	if (!isAuthenticated) {
+		return <Redirect to={loginPath || '/login'}/>;
+	}
+
+	return redirectTo ?
+		<Redirect to={redirectTo}/> :
+		<RouteWithProps component={Component} {...rest}/>;
+};
 
 export const ConditionalRoute = ({
 	conditional,
