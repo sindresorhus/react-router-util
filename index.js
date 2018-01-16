@@ -1,19 +1,18 @@
-'use strict';
-const React = require('react');
-const {BrowserRouter, withRouter} = require('react-router-dom');
-const {createBrowserHistory} = require('history');
+/* eslint-disable no-unused-vars */
+import React from 'react';
+import {BrowserRouter as OriginalBrowserRouter, Route, withRouter} from 'react-router-dom';
+import {createBrowserHistory} from 'history';
 
-const history = createBrowserHistory();
-module.exports.history = history;
+export const history = createBrowserHistory();
 
-module.exports.BrowserRouter = class extends BrowserRouter {
+export class BrowserRouter extends OriginalBrowserRouter {
 	constructor(...args) {
 		super(...args);
 		this.history = history;
 	}
-};
+}
 
-class Debug extends React.Component {
+class DebugComponent extends React.Component {
 	componentDidUpdate() {
 		if (process && process.env && process.env.NODE_ENV === 'production') {
 			return;
@@ -26,11 +25,22 @@ class Debug extends React.Component {
 		return null;
 	}
 }
-module.exports.Debug = withRouter(Debug);
+export const Debug = withRouter(DebugComponent);
 
-class CurrentRoute extends React.Component {
+class CurrentRouteComponent extends React.Component {
 	render() {
 		return this.props.location.pathname;
 	}
 }
-module.exports.CurrentRoute = withRouter(CurrentRoute);
+export const CurrentRoute = withRouter(CurrentRouteComponent);
+
+export const RouteWithProps = ({path, exact, strict, location, sensitive, component: Component, ...rest}) => (
+	<Route
+		path={path}
+		exact={exact}
+		strict={strict}
+		location={location}
+		sensitive={sensitive}
+		render={props => <Component {...props} {...rest}/>}
+	/>
+);

@@ -12,11 +12,14 @@
 	"engines": {
 		"node": ">=6"
 	},
+	"main": "./dist/index.js",
 	"scripts": {
-		"test": "xo && ava"
+		"build": "babel index.js --out-dir=dist",
+		"test": "xo && ava",
+		"prepublishOnly": "npm run build"
 	},
 	"files": [
-		"index.js"
+		"dist"
 	],
 	"keywords": [
 		"react",
@@ -38,6 +41,11 @@
 	],
 	"devDependencies": {
 		"ava": "*",
+		"babel-cli": "^6.26.0",
+		"babel-eslint": "^8.0.3",
+		"babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+		"babel-preset-react": "^6.24.1",
+		"babel-preset-stage-3": "^6.24.1",
 		"xo": "*"
 	},
 	"peerDependencies": {
@@ -45,9 +53,19 @@
 		"react-router-dom": ">=4"
 	},
 	"xo": {
+		"parser": "babel-eslint",
 		"rules": {
 			"import/no-unresolved": "off",
 			"import/no-extraneous-dependencies": "off"
 		}
+	},
+	"babel": {
+		"plugins": [
+			"transform-es2015-modules-commonjs"
+		],
+		"presets": [
+			"react",
+			"stage-3"
+		]
 	}
 }

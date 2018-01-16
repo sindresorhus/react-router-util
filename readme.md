@@ -60,6 +60,22 @@ React component that renders the pathname of the current route. For example: `/d
 
 Unrendered React component that prints the `props` of the current route component to the console when not in production.
 
+### `<RouteWithProps/>`
+
+Like [`<Route/>`](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/Route.md), but passes additional props to the given `component`. The following props are passed to the route: `path`, `component`, `exact`, `strict`, `location`, `sensitive`, while the rest are passed to the `component`.
+
+Before:
+
+```jsx
+<Route path="/unicorn" render={props => <Unicorn {...props} foo={'cake'} bar/>}/>
+```
+
+After:
+
+```jsx
+<Route path="/unicorn" component={Unicorn} foo={'cake'} bar/>
+```
+
 
 ## License
 
