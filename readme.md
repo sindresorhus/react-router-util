@@ -105,7 +105,7 @@ Another example:
 <AuthenticatedRoute
 	path="/admin"
 	isAuthenticated={isLoggedIn}
-	redirectTo="/admin/dashboard
+	redirectTo="/admin/dashboard"
 	loginPath="/admin/login"
 />
 ```
