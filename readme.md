@@ -38,7 +38,7 @@ const App = () => (
 			<Route path="/about" component={About}/>
 		</>
 	</Router>
-)
+);
 ```
 
 
