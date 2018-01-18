@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
 	BrowserRouter as OriginalBrowserRouter,
 	Route,
@@ -45,32 +46,52 @@ export const RouteWithProps = ({path, exact, strict, location, sensitive, compon
 export const AuthenticatedRoute = ({
 	isAuthenticated,
 	redirectTo,
-	loginPath,
 	component: Component,
+	loginPath,
 	...rest
 }) => {
+	const children = rest.children || null;
+
 	if (!isAuthenticated) {
-		return <Redirect to={loginPath || '/login'}/>;
+		// TODO: `history.location.pathname` probably doesn't work with nested routes
+		const redirect = to => to === history.location.pathname ? children : <Redirect to={to}/>;
+
+		return redirect(loginPath || '/login');
 	}
 
-	return redirectTo ?
-		<Redirect to={redirectTo}/> :
-		<RouteWithProps component={Component} {...rest}/>;
+	if (redirectTo && redirectTo !== history.location.pathname) {
+		return <Redirect to={redirectTo}/>;
+	}
+
+	return (
+		<React.Fragment>
+			{children}
+			{Component && <RouteWithProps component={Component} {...rest}/>}
+		</React.Fragment>
+	);
+};
+AuthenticatedRoute.propTypes = {
+	...Route.PropTypes,
+	isAuthenticated: PropTypes.bool.isRequired,
+	redirectTo: PropTypes.string,
+	component: PropTypes.element,
+	loginPath: PropTypes.string,
+	children: PropTypes.node
 };
 
 export const ConditionalRoute = ({
 	conditional,
-	trueComponent,
-	falseComponent,
+	trueComponent: True,
+	falseComponent: False,
 	trueRedirectTo,
 	falseRedirectTo,
 	...rest
 }) => {
 	let ret;
 	if (conditional) {
-		ret = trueComponent ? <trueComponent/> : <Redirect to={trueRedirectTo}/>;
+		ret = True ? <True/> : <Redirect to={trueRedirectTo}/>;
 	} else {
-		ret = falseComponent ? <falseComponent/> : <Redirect to={falseRedirectTo}/>;
+		ret = False ? <False/> : <Redirect to={falseRedirectTo}/>;
 	}
 
 	return <Route render={() => ret} {...rest}/>;

@@ -39,6 +39,9 @@
 		"helper",
 		"helpers"
 	],
+	"dependencies": {
+		"prop-types": "^15.6.0"
+	},
 	"devDependencies": {
 		"ava": "*",
 		"babel-cli": "^6.26.0",
