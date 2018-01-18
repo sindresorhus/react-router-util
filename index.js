@@ -18,16 +18,12 @@ export class BrowserRouter extends OriginalBrowserRouter {
 	}
 }
 
-class DebugComponent extends React.Component {
-	componentDidUpdate() {
-		if (process && process.env && process.env.NODE_ENV === 'production') {
-			return;
+class DebugComponent extends React.PureComponent {
+	render() {
+		if (process.env.NODE_ENV !== 'production') {
+			console.log('Route:', this.props.location.pathname, this.props);
 		}
 
-		console.log('Route:', this.props.location.pathname, this.props);
-	}
-
-	render() {
 		return null;
 	}
 }
