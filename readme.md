@@ -145,6 +145,11 @@ Like [`<Link>`](https://github.com/ReactTraining/react-router/blob/master/packag
 Like [`<Link>`](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/api/Link.md), but navigates to the next route in the history. Accepts any props `<Link>` supports except for `to`.
 
 
+## Related
+
+- [react-extras](https://github.com/sindresorhus/react-extras) - Useful components and utilities for working with React
+
+
 ## License
 
 MIT © [Sindre Sorhus](https://sindresorhus.com)
