@@ -46,7 +46,7 @@ const App = () => (
 
 ### `history`
 
-A [`history`](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/history.md) singleton that you can use in `<Router history={history}>` to access the history from outside the router. Can be useful for progammatically navigating to a route when used in combination with non-React code, like Electron IPC events, etc.
+A [`history`](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/history.md) singleton that you can use in `<Router history={history}>` to access the history from outside the router. Can be useful for programmatically navigating to a route when used in combination with non-React code, like Electron IPC events, etc.
 
 ### `<BrowserRouter>`
 
@@ -113,7 +113,7 @@ Another example:
 Yet another example:
 
 ```jsx
-<AuthenticatedRoute isAuthenticated={this.state.isLoggedIn} redirectTo="/dashboard">
+<AuthenticatedRoute isAuthenticated={this.state.isLoggedIn} redirectFromLoginTo="/dashboard">
 	<Switch>
 		<RouteWithProps path="/login" component={Login} {...this.state}/>
 		<RouteWithProps component={Main} {...this.state}/>
