@@ -47,7 +47,8 @@ export const AuthenticatedRoute = ({
 	isAuthenticated,
 	redirectTo,
 	component: Component,
-	loginPath,
+	loginPath = '/login',
+	redirectFromLoginTo,
 	...rest
 }) => {
 	const children = rest.children || null;
@@ -56,10 +57,14 @@ export const AuthenticatedRoute = ({
 		// TODO: `history.location.pathname` probably doesn't work with nested routes
 		const redirect = to => to === history.location.pathname ? children : <Redirect to={to}/>;
 
-		return redirect(loginPath || '/login');
+		return redirect(loginPath);
 	}
 
-	if (redirectTo && redirectTo !== history.location.pathname) {
+	if (redirectFromLoginTo && history.location.pathname === loginPath) {
+		return <Redirect to={redirectFromLoginTo}/>;
+	}
+
+	if (redirectTo) {
 		return <Redirect to={redirectTo}/>;
 	}
 

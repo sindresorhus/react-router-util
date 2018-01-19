@@ -78,7 +78,7 @@ After:
 
 ### `<AuthenticatedRoute/>`
 
-An authenticated version of [`<Route/>`](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/Route.md). You pass it an `isAuthenticated` prop with a boolean of whether it's authenticated. If it's `true`, it will render the given `component` or redirect to the given `redirectTo` path. If it's `false`, it will redirect to `/login` or `loginPath` if specified. It accepts all the props `<Route/>` accepts except for `render`. Additional props are passed to the `component`. You can also pass it children.
+An authenticated version of [`<Route/>`](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/Route.md). You pass it an `isAuthenticated` prop with a boolean of whether it's authenticated. If it's `true`, it will render the given `component` or redirect to the given `redirectTo` path. If it's `false`, it will redirect to `/login` or `loginPath` if specified. You can specify `redirectFromLoginTo` to have it redirect somewhere from the `loginPath` when authenticated. It accepts all the props `<Route/>` accepts except for `render`. Additional props are passed to the `component`. You can also pass it children.
 
 Before:
 
