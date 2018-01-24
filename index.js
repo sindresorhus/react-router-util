@@ -79,7 +79,7 @@ AuthenticatedRoute.propTypes = {
 	...Route.PropTypes,
 	isAuthenticated: PropTypes.bool.isRequired,
 	redirectTo: PropTypes.string,
-	component: PropTypes.element,
+	component: PropTypes.func,
 	loginPath: PropTypes.string,
 	children: PropTypes.node
 };
