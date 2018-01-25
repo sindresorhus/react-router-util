@@ -55,7 +55,7 @@ export const AuthenticatedRoute = ({
 
 	if (!isAuthenticated) {
 		// TODO: `history.location.pathname` probably doesn't work with nested routes
-		const redirect = to => to === history.location.pathname ? children : <Redirect to={to}/>;
+		const redirect = to => to === history.location.pathname.replace(/\b\/.*$/, '') ? children : <Redirect to={to}/>;
 
 		return redirect(loginPath);
 	}
