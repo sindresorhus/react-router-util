@@ -85,16 +85,16 @@ AuthenticatedRoute.propTypes = {
 };
 
 export const ConditionalRoute = ({
-  conditional,
-  trueComponent: True,
-  falseComponent: False,
-  trueRedirectTo,
-  falseRedirectTo,
-  ...rest
+	conditional,
+	trueComponent: True,
+	falseComponent: False,
+	trueRedirectTo,
+	falseRedirectTo,
+	...rest
 }) => {
-  return conditional
-	 ? (True ? <RouteWithProps component={True} {...rest}/> : <Redirect to={trueRedirectTo}/>)
-	 : (False ? <RouteWithProps component={False} {...rest}/> : <Redirect to={falseRedirectTo}/>);
+	return conditional ?
+		(True ? <RouteWithProps component={True} {...rest}/> : <Redirect to={trueRedirectTo}/>) :
+		(False ? <RouteWithProps component={False} {...rest}/> : <Redirect to={falseRedirectTo}/>);
 };
 
 export const BackLink = withRouter(({history, children, ...rest}) => {
