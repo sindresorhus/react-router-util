@@ -92,14 +92,14 @@ export const ConditionalRoute = ({
 	falseRedirectTo,
 	...rest
 }) => {
-	let ret;
 	if (conditional) {
-		ret = True ? <True/> : <Redirect to={trueRedirectTo}/>;
-	} else {
-		ret = False ? <False/> : <Redirect to={falseRedirectTo}/>;
+		return True
+			? <Route render={(props) => <True {...props} />} {...rest}/>
+			: <Route render={() => <Redirect to={trueRedirectTo}/>} {...rest}/>;
 	}
-
-	return <Route render={() => ret} {...rest}/>;
+	return False
+		? <Route render={(props) => <False {...props} />} {...rest}/>
+		: <Route render={() => <Redirect to={falseRedirectTo}/>} {...rest}/>;
 };
 
 export const BackLink = withRouter(({history, children, ...rest}) => {
