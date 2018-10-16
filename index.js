@@ -94,11 +94,12 @@ export const ConditionalRoute = ({
 }) => {
 	if (conditional) {
 		return True ?
-			<Route render={props => <True {...props} />} {...rest}/> :
+			<Route render={props => <True {...props}/>} {...rest}/> :
 			<Route render={() => <Redirect to={trueRedirectTo}/>} {...rest}/>;
 	}
+
 	return False ?
-		<Route render={props => <False {...props} />} {...rest}/> :
+		<Route render={props => <False {...props}/>} {...rest}/> :
 		<Route render={() => <Redirect to={falseRedirectTo}/>} {...rest}/>;
 };
 
