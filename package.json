@@ -61,7 +61,11 @@
 		"rules": {
 			"import/no-unresolved": "off",
 			"import/no-extraneous-dependencies": "off"
-		}
+		},
+		"envs": [
+			"node",
+			"browser"
+		]
 	},
 	"babel": {
 		"plugins": [

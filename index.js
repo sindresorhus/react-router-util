@@ -3,16 +3,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
 	BrowserRouter as OriginalBrowserRouter,
+	StaticRouter as OriginalStaticRouter,
 	Route,
 	Redirect,
 	Link,
 	withRouter
 } from 'react-router-dom';
-import {createBrowserHistory} from 'history';
+import {createBrowserHistory, createMemoryHistory} from 'history';
 
-export const history = createBrowserHistory();
+const canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+
+export const history = canUseDOM ? createBrowserHistory() : createMemoryHistory();
 
 export class BrowserRouter extends OriginalBrowserRouter {
+	constructor(...args) {
+		super(...args);
+		this.history = history;
+	}
+}
+
+export class StaticRouter extends OriginalStaticRouter {
 	constructor(...args) {
 		super(...args);
 		this.history = history;
