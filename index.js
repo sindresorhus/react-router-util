@@ -11,7 +11,7 @@ import {
 } from 'react-router-dom';
 import {createBrowserHistory, createMemoryHistory} from 'history';
 
-const canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+const canUseDOM = Boolean(typeof window !== 'undefined' && window.document && window.document.createElement);
 
 export const history = canUseDOM ? createBrowserHistory() : createMemoryHistory();
 
