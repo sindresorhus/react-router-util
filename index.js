@@ -17,7 +17,9 @@ export const history = canUseDOM ? createBrowserHistory() : createMemoryHistory(
 export class BrowserRouter extends OriginalBrowserRouter {
 	constructor(...args) {
 		super(...args);
-		this.history = history;
+		const props = args[0];
+
+		this.history = props.history || history;
 	}
 }
 
