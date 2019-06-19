@@ -50,6 +50,13 @@
 		"babel-preset-env": "^1.6.1",
 		"babel-preset-react": "^6.24.1",
 		"babel-preset-stage-3": "^6.24.1",
+		"babel-register": "^6.26.0",
+		"enzyme": "^3.9.0",
+		"enzyme-adapter-react-16": "^1.11.2",
+		"jsdom": "^14.0.0",
+		"react": "^16.8.6",
+		"react-dom": "^16.8.6",
+		"react-router-dom": "^4.3.1",
 		"xo": "^0.23.0"
 	},
 	"peerDependencies": {
@@ -61,7 +68,11 @@
 		"rules": {
 			"import/no-unresolved": "off",
 			"import/no-extraneous-dependencies": "off"
-		}
+		},
+		"envs": [
+			"node",
+			"browser"
+		]
 	},
 	"babel": {
 		"plugins": [
@@ -72,5 +83,13 @@
 			"react",
 			"stage-3"
 		]
+	},
+	"ava": {
+		"require": [
+			"babel-register",
+			"./test/helpers/setup-browser-env.js",
+			"./test/helpers/setup-enzyme.js"
+		],
+		"babel": "inherit"
 	}
 }

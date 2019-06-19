@@ -48,9 +48,9 @@ const App = () => (
 
 A [`history`](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/history.md) singleton that you can use in `<Router history={history}>` to access the history from outside the router. Can be useful for programmatically navigating to a route when used in combination with non-React code, like Electron IPC events, etc.
 
-### `<BrowserRouter>`
+### `<BrowserRouter>` and `<StaticRouter>`
 
-Same as the official `<BrowserRouter>`, but with `history={history}` set to the above `history` singleton, so you can just import the singleton to access the router `history` object from outside the router.
+Same as the official `<BrowserRouter>` and `<StaticRouter>`, but with `history={history}` set to the above `history` singleton, so you can just import the singleton to access the router `history` object from outside the router.
 
 ### `<Debug/>`
 
