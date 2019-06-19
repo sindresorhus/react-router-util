@@ -11,7 +11,7 @@
 	},
 	"main": "./dist/index.js",
 	"engines": {
-		"node": ">=6"
+		"node": ">=8"
 	},
 	"scripts": {
 		"build": "babel index.js --out-dir=dist",
@@ -43,53 +43,66 @@
 		"prop-types": "^15.6.0"
 	},
 	"devDependencies": {
-		"ava": "^0.25.0",
-		"babel-cli": "^6.26.0",
+		"@babel/cli": "^7.4.4",
+		"@babel/plugin-transform-modules-commonjs": "^7.4.4",
+		"@babel/preset-env": "^7.4.5",
+		"@babel/preset-react": "^7.0.0",
+		"@babel/register": "^7.4.4",
+		"ava": "^2.1.0",
 		"babel-eslint": "^10.0.1",
-		"babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
 		"babel-preset-env": "^1.6.1",
 		"babel-preset-react": "^6.24.1",
-		"babel-preset-stage-3": "^6.24.1",
-		"babel-register": "^6.26.0",
 		"enzyme": "^3.9.0",
 		"enzyme-adapter-react-16": "^1.11.2",
-		"jsdom": "^14.0.0",
+		"eslint-config-xo-react": "^0.19.0",
+		"eslint-plugin-react": "^7.13.0",
+		"eslint-plugin-react-hooks": "^1.6.0",
+		"jsdom": "^15.1.1",
 		"react": "^16.8.6",
 		"react-dom": "^16.8.6",
-		"react-router-dom": "^4.3.1",
-		"xo": "^0.23.0"
+		"react-router-dom": "^5.0.1",
+		"xo": "^0.24.0"
 	},
 	"peerDependencies": {
-		"react": ">=16",
-		"react-router-dom": ">=4"
+		"react": ">=16.8",
+		"react-router-dom": ">=5"
 	},
 	"xo": {
-		"parser": "babel-eslint",
-		"rules": {
-			"import/no-unresolved": "off",
-			"import/no-extraneous-dependencies": "off"
-		},
 		"envs": [
 			"node",
 			"browser"
+		],
+		"parser": "babel-eslint",
+		"extends": [
+			"xo-react"
+		],
+		"rules": {
+			"import/no-unresolved": "off",
+			"import/no-extraneous-dependencies": "off",
+			"ava/no-ignored-test-files": "off",
+			"unicorn/import-index": "off",
+			"react/prop-types": "off",
+			"react/require-default-props": "off"
+		}
+	},
+	"ava": {
+		"files": [
+			"!test/fixtures/**/*",
+			"!test/helpers/**/*"
+		],
+		"require": [
+			"@babel/register",
+			"./test/helpers/setup-browser-env.js",
+			"./test/helpers/setup-enzyme.js"
 		]
 	},
 	"babel": {
 		"plugins": [
-			"transform-es2015-modules-commonjs"
+			"@babel/plugin-transform-modules-commonjs"
 		],
 		"presets": [
-			"env",
-			"react",
-			"stage-3"
+			"@babel/preset-env",
+			"@babel/preset-react"
 		]
-	},
-	"ava": {
-		"require": [
-			"babel-register",
-			"./test/helpers/setup-browser-env.js",
-			"./test/helpers/setup-enzyme.js"
-		],
-		"babel": "inherit"
 	}
 }

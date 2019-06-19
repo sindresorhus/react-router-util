@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars, import/no-unassigned-import, unicorn/import-index */
 import test from 'ava';
 import React from 'react';
 import {render} from 'enzyme';
@@ -14,11 +13,11 @@ test('renders a BrowserRouter', t => {
 	const {BrowserRouter} = require('../index');
 	const BrowserComponent = props => (
 		<BrowserRouter {...props}>
-			<App />
+			<App/>
 		</BrowserRouter>
 	);
 
-	const wrapper = render(<BrowserComponent />);
+	const wrapper = render(<BrowserComponent/>);
 	t.true(wrapper.text().includes('HOME'));
 	t.false(wrapper.text().includes('ABOUT'));
 });

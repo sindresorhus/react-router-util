@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -79,12 +78,13 @@ export const AuthenticatedRoute = ({
 	}
 
 	return (
-		<React.Fragment>
+		<>
 			{children}
 			{Component && <RouteWithProps component={Component} {...rest}/>}
-		</React.Fragment>
+		</>
 	);
 };
+
 AuthenticatedRoute.propTypes = {
 	...Route.PropTypes,
 	isAuthenticated: PropTypes.bool.isRequired,

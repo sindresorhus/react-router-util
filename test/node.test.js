@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars, unicorn/import-index */
 import test from 'ava';
 import React from 'react';
 import {render} from 'enzyme';
@@ -20,12 +19,12 @@ test('renders a StaticRouter', t => {
 	const {StaticRouter} = require('../index');
 	const ServerComponent = props => (
 		<StaticRouter {...props}>
-			<App />
+			<App/>
 		</StaticRouter>
 	);
 
 	const context = {};
-	const wrapper = render(<ServerComponent location="/" context={context} />);
+	const wrapper = render(<ServerComponent location="/" context={context}/>);
 	t.true(wrapper.text().includes('HOME'));
 	t.false(wrapper.text().includes('ABOUT'));
 });

@@ -159,8 +159,3 @@ Like [`<Link>`](https://github.com/ReactTraining/react-router/blob/master/packag
 ## Related
 
 - [react-extras](https://github.com/sindresorhus/react-extras) - Useful components and utilities for working with React
-
-
-## License
-
-MIT © [Sindre Sorhus](https://sindresorhus.com)
