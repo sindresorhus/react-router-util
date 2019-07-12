@@ -24,7 +24,7 @@ test('renders a BrowserRouter', t => {
 	t.false(wrapper.text().includes('ABOUT'));
 });
 
-test('passes custom history object', t => {
+test('accepts custom history object', t => {
 	const {BrowserRouter} = require('../index');
 	const history = createBrowserHistory();
 	history.unicorn = 42;
@@ -37,6 +37,5 @@ test('passes custom history object', t => {
 	);
 
 	const wrapper = render(<BrowserComponent history={history}/>);
-	console.log(wrapper.text());
 	t.true(wrapper.text().includes('42'));
 });
