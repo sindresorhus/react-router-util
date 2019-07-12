@@ -1,5 +1,7 @@
 import test from 'ava';
 import React from 'react';
+import {Route} from 'react-router-dom';
+import {createBrowserHistory} from 'history';
 import {render} from 'enzyme';
 import {App} from './fixtures/app';
 
@@ -20,4 +22,20 @@ test('renders a BrowserRouter', t => {
 	const wrapper = render(<BrowserComponent/>);
 	t.true(wrapper.text().includes('HOME'));
 	t.false(wrapper.text().includes('ABOUT'));
+});
+
+test('accepts custom history object', t => {
+	const {BrowserRouter} = require('../index');
+	const history = createBrowserHistory();
+	history.unicorn = 42;
+	const BrowserComponent = props => (
+		<BrowserRouter {...props}>
+			<div>
+				<Route path="/" render={({history: innerHistory}) => <>{innerHistory.unicorn}</>}/>
+			</div>
+		</BrowserRouter>
+	);
+
+	const wrapper = render(<BrowserComponent history={history}/>);
+	t.true(wrapper.text().includes('42'));
 });
