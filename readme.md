@@ -50,7 +50,7 @@ A [`history`](https://github.com/ReactTraining/react-router/blob/master/packages
 
 ### `<BrowserRouter>` and `<StaticRouter>`
 
-Same as the official `<BrowserRouter>` and `<StaticRouter>`, but with `history={history}` set to the above `history` singleton, so you can just import the singleton to access the router `history` object from outside the router.
+Same as the official `<BrowserRouter>` and `<StaticRouter>`, but with `history={history}` set to the above `history` singleton, so you can just import the singleton to access the router `history` object from outside the router. This behaviour can be overridden with `<BrowserRouter history={yourOwnHistory}>`.
 
 ### `<Debug/>`
 
