@@ -2,8 +2,8 @@ import test from 'ava';
 import React from 'react';
 import {Route} from 'react-router-dom';
 import {createBrowserHistory} from 'history';
-import {render} from 'enzyme';
-import {App} from './fixtures/app';
+import {render, mount} from 'enzyme';
+import {App, Login} from './fixtures/app';
 
 test('creates a browser history', t => {
 	const {history} = require('../index');
@@ -38,4 +38,73 @@ test('accepts custom history object', t => {
 
 	const wrapper = render(<BrowserComponent history={history}/>);
 	t.true(wrapper.text().includes('42'));
+});
+
+test('allows access to specified path if authenticated', t => {
+	const {BrowserRouter, AuthenticatedRoute, history} = require('../index');
+	history.location.pathname = '/about';
+	const isAuthenticated = true;
+	const BrowserComponent = props => (
+		<BrowserRouter {...props}>
+			<div>
+				<AuthenticatedRoute
+					exact
+					path="/about"
+					isAuthenticated={isAuthenticated}
+					component={App}
+				/>
+				<Login/>
+			</div>
+		</BrowserRouter>
+	);
+
+	const wrapper = mount(<BrowserComponent history={history}/>);
+
+	t.true(wrapper.text().includes('ABOUT'));
+});
+
+test('redirects to /login if not authenticated', t => {
+	const {BrowserRouter, AuthenticatedRoute, history} = require('../index');
+	history.location.pathname = '/test';
+	const isAuthenticated = false;
+	const BrowserComponent = props => (
+		<BrowserRouter {...props}>
+			<div>
+				<AuthenticatedRoute
+					exact
+					path="/"
+					isAuthenticated={isAuthenticated}
+					component={App}
+				/>
+				<Login/>
+			</div>
+		</BrowserRouter>
+	);
+
+	const wrapper = mount(<BrowserComponent history={history}/>);
+
+	t.true(wrapper.text().includes('LOGIN'));
+});
+
+test('AuthenticatedRoute works for nested routes', t => {
+	const {BrowserRouter, AuthenticatedRoute, history} = require('../index');
+	history.location.pathname = '/dashboard/test';
+	const isAuthenticated = false;
+	const BrowserComponent = props => (
+		<BrowserRouter {...props}>
+			<div>
+				<AuthenticatedRoute
+					exact
+					path="/dashboard/:dashboardParams"
+					isAuthenticated={isAuthenticated}
+					component={App}
+				/>
+				<Login/>
+			</div>
+		</BrowserRouter>
+	);
+
+	const wrapper = mount(<BrowserComponent history={history}/>);
+
+	t.true(wrapper.text().includes('LOGIN'));
 });

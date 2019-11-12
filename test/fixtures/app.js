@@ -7,3 +7,7 @@ export const App = () => (
 		<Route path="/about" component={() => <div>ABOUT</div>}/>
 	</>
 );
+
+export const Login = () => (
+	<Route exact path="/login" component={() => <div>LOGIN</div>}/>
+);

@@ -6,7 +6,8 @@ import {
 	Route,
 	Redirect,
 	Link,
-	withRouter
+	withRouter,
+	matchPath
 } from 'react-router-dom';
 import {createBrowserHistory, createMemoryHistory} from 'history';
 
@@ -64,9 +65,13 @@ export const AuthenticatedRoute = ({
 }) => {
 	const children = rest.children || null;
 
+	const {path, exact} = rest;
+
 	if (!isAuthenticated) {
-		// TODO: `history.location.pathname` probably doesn't work with nested routes
-		const redirect = to => to === history.location.pathname.replace(/\b\/.*$/, '') ? children : <Redirect to={to}/>;
+		const redirect = to => matchPath(to, {
+			path,
+			exact
+		}) ? children : <Redirect to={to}/>;
 
 		return redirect(loginPath);
 	}
