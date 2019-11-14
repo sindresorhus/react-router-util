@@ -41,16 +41,15 @@ test('accepts custom history object', t => {
 });
 
 test('allows access to specified path if authenticated', t => {
-	const {BrowserRouter, AuthenticatedRoute, history} = require('../index');
+	const {BrowserRouter, AuthenticatedRoute, history} = require('../');
 	history.location.pathname = '/about';
-	const isAuthenticated = true;
 	const BrowserComponent = props => (
 		<BrowserRouter {...props}>
 			<div>
 				<AuthenticatedRoute
 					exact
 					path="/about"
-					isAuthenticated={isAuthenticated}
+					isAuthenticated
 					component={App}
 				/>
 				<Login/>
@@ -64,16 +63,15 @@ test('allows access to specified path if authenticated', t => {
 });
 
 test('redirects to /login if not authenticated', t => {
-	const {BrowserRouter, AuthenticatedRoute, history} = require('../index');
+	const {BrowserRouter, AuthenticatedRoute, history} = require('../');
 	history.location.pathname = '/test';
-	const isAuthenticated = false;
 	const BrowserComponent = props => (
 		<BrowserRouter {...props}>
 			<div>
 				<AuthenticatedRoute
 					exact
 					path="/"
-					isAuthenticated={isAuthenticated}
+					isAuthenticated={false}
 					component={App}
 				/>
 				<Login/>
@@ -87,16 +85,15 @@ test('redirects to /login if not authenticated', t => {
 });
 
 test('AuthenticatedRoute works for nested routes', t => {
-	const {BrowserRouter, AuthenticatedRoute, history} = require('../index');
+	const {BrowserRouter, AuthenticatedRoute, history} = require('../');
 	history.location.pathname = '/dashboard/test';
-	const isAuthenticated = false;
 	const BrowserComponent = props => (
 		<BrowserRouter {...props}>
 			<div>
 				<AuthenticatedRoute
 					exact
 					path="/dashboard/:dashboardParams"
-					isAuthenticated={isAuthenticated}
+					isAuthenticated={false}
 					component={App}
 				/>
 				<Login/>
