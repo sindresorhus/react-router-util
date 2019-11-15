@@ -1,9 +1,9 @@
 import test from 'ava';
 import React from 'react';
-import {Route} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import {createBrowserHistory} from 'history';
 import {render, mount} from 'enzyme';
-import {App, Login} from './fixtures/app';
+import {App, Login, DashboardMain} from './fixtures/app';
 
 test('creates a browser history', t => {
 	const {history} = require('../index');
@@ -57,7 +57,7 @@ test('allows access to specified path if authenticated', t => {
 		</BrowserRouter>
 	);
 
-	const wrapper = mount(<BrowserComponent history={history}/>);
+	const wrapper = mount(<BrowserComponent/>);
 
 	t.true(wrapper.text().includes('ABOUT'));
 });
@@ -79,12 +79,12 @@ test('redirects to /login if not authenticated', t => {
 		</BrowserRouter>
 	);
 
-	const wrapper = mount(<BrowserComponent history={history}/>);
+	const wrapper = mount(<BrowserComponent/>);
 
 	t.true(wrapper.text().includes('LOGIN'));
 });
 
-test('AuthenticatedRoute works for nested routes', t => {
+test('AuthenticatedRoute login redirect works for nested routes', t => {
 	const {BrowserRouter, AuthenticatedRoute, history} = require('../');
 	history.location.pathname = '/dashboard/test';
 	const BrowserComponent = props => (
@@ -101,7 +101,59 @@ test('AuthenticatedRoute works for nested routes', t => {
 		</BrowserRouter>
 	);
 
-	const wrapper = mount(<BrowserComponent history={history}/>);
+	const wrapper = mount(<BrowserComponent/>);
 
 	t.true(wrapper.text().includes('LOGIN'));
+});
+
+test('AuthenticatedRoute redirects to Login for nested routes in nested routing', t => {
+	const {BrowserRouter, AuthenticatedRoute, history} = require('../');
+	history.location.pathname = '/dashboard/main';
+	const BrowserComponent = props => (
+		<BrowserRouter {...props}>
+			<div>
+				<AuthenticatedRoute
+					exact
+					path="/dashboard/:dashboardParams"
+					isAuthenticated={false}
+					component={App}
+				>
+					<Switch>
+						<DashboardMain/>
+					</Switch>
+				</AuthenticatedRoute>
+				<Login/>
+			</div>
+		</BrowserRouter>
+	);
+
+	const wrapper = mount(<BrowserComponent/>);
+
+	t.true(wrapper.text().includes('LOGIN'));
+});
+
+test('AuthenticatedRoute allows access to nested routes in nested routing', t => {
+	const {BrowserRouter, AuthenticatedRoute, history} = require('../');
+	history.location.pathname = '/dashboard/main';
+	const BrowserComponent = props => (
+		<BrowserRouter {...props}>
+			<div>
+				<AuthenticatedRoute
+					exact
+					isAuthenticated
+					path="/dashboard/:dashboardParams"
+					component={App}
+				>
+					<Switch>
+						<DashboardMain/>
+					</Switch>
+				</AuthenticatedRoute>
+				<Login/>
+			</div>
+		</BrowserRouter>
+	);
+
+	const wrapper = mount(<BrowserComponent/>);
+
+	t.true(wrapper.text().includes('DASHBOARD MAIN'));
 });

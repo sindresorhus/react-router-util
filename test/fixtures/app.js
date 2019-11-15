@@ -11,3 +11,7 @@ export const App = () => (
 export const Login = () => (
 	<Route exact path="/login" component={() => <div>LOGIN</div>}/>
 );
+
+export const DashboardMain = () => (
+	<Route exact path="/dashboard/main" component={() => <div>DASHBOARD MAIN</div>}/>
+);
