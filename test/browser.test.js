@@ -48,8 +48,8 @@ test('allows access to specified path if authenticated', t => {
 			<div>
 				<AuthenticatedRoute
 					exact
-					path="/about"
 					isAuthenticated
+					path="/about"
 					component={App}
 				/>
 				<Login/>
