@@ -121,6 +121,17 @@ Yet another example:
 </AuthenticatedRoute>
 ```
 
+Example with nested routes: 
+```jsx
+<AuthenticatedRoute path="/dashboard/:nested" isAuthenticated={this.state.isLoggedIn}>
+	<Switch>
+		<RouteWithProps path="/information" component={Login} {...this.state}/>
+		<RouteWithProps path="/contact" component={Main} {...this.state}/>
+	</Switch>
+</AuthenticatedRoute>
+```
+When using nested routes, the `:nested` value must be specified in the outer route so that [`matchPath`](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/matchPath.md) can map it to the correct nested route (`/information` and `/contact` in this case).
+
 ### `<ConditionalRoute/>`
 
 A conditional version of [`<Route/>`](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/Route.md). You pass it a `conditional` prop with a boolean. If it's truthy, either the given `trueComponent` will be rendered or it will redirect to `trueRedirectTo`. If it's falsy, either the given `falseComponent` will be rendered or it will redirect to `trueRedirectTo`. It accepts all the props `<Route/>` accepts except for `render`.
