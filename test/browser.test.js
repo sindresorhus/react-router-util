@@ -3,7 +3,7 @@ import React from 'react';
 import {Route, Switch} from 'react-router-dom';
 import {createBrowserHistory} from 'history';
 import {render, mount} from 'enzyme';
-import {App, Login, DashboardMain} from './fixtures/app';
+import {App, Login, DashboardLogin, DashboardMain} from './fixtures/app';
 
 test('creates a browser history', t => {
 	const {history} = require('../index');
@@ -156,4 +156,28 @@ test('AuthenticatedRoute allows access to nested routes in nested routing', t =>
 	const wrapper = mount(<BrowserComponent/>);
 
 	t.true(wrapper.text().includes('DASHBOARD MAIN'));
+});
+
+test('AuthenticatedRoute matchPath positive allows access to loginPath as nested route', t => {
+	const {BrowserRouter, AuthenticatedRoute, history} = require('../');
+	history.location.pathname = '/dashboard/login';
+	const BrowserComponent = props => (
+		<BrowserRouter {...props}>
+			<div>
+				<AuthenticatedRoute
+					exact
+					isAuthenticated={false}
+					path="/dashboard/:dashboardParams"
+					loginPath="/dashboard/login"
+				>
+					<DashboardMain/>
+					<DashboardLogin/>
+				</AuthenticatedRoute>
+			</div>
+		</BrowserRouter>
+	);
+
+	const wrapper = mount(<BrowserComponent/>);
+
+	t.true(wrapper.text().includes('DASHBOARD LOGIN'));
 });
