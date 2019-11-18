@@ -125,8 +125,8 @@ Example with nested routes:
 ```jsx
 <AuthenticatedRoute path="/dashboard/:nested" isAuthenticated={this.state.isLoggedIn}>
 	<Switch>
-		<RouteWithProps path="/information" component={Login} {...this.state}/>
-		<RouteWithProps path="/contact" component={Main} {...this.state}/>
+		<RouteWithProps path="/information" component={Information} {...this.state}/>
+		<RouteWithProps path="/contact" component={Contact} {...this.state}/>
 	</Switch>
 </AuthenticatedRoute>
 ```
