@@ -8,7 +8,7 @@ export const App = () => (
 	</>
 );
 
-export const Login = () => console.log('lelele') || (
+export const Login = () => (
 	<Route exact path="/login" component={() => <div>LOGIN</div>}/>
 );
 
@@ -16,6 +16,6 @@ export const DashboardMain = () => (
 	<Route exact path="/dashboard/main" component={() => <div>DASHBOARD MAIN</div>}/>
 );
 
-export const DashboardLogin = () => console.log('here') || (
+export const DashboardLogin = () => (
 	<Route exact path="/dashboard/login" component={() => <div>DASHBOARD LOGIN</div>}/>
 );
