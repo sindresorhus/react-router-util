@@ -121,7 +121,8 @@ Yet another example:
 </AuthenticatedRoute>
 ```
 
-Example with nested routes: 
+Example with nested routes:
+
 ```jsx
 <AuthenticatedRoute path="/dashboard/:nested" isAuthenticated={this.state.isLoggedIn}>
 	<Switch>
@@ -130,6 +131,7 @@ Example with nested routes:
 	</Switch>
 </AuthenticatedRoute>
 ```
+
 When using nested routes, the `:nested` value must be specified in the outer route so that [`matchPath`](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/matchPath.md) can map it to the correct nested route (`/information` and `/contact` in this case).
 
 ### `<ConditionalRoute/>`
