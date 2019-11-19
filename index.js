@@ -68,11 +68,7 @@ export const AuthenticatedRoute = ({
 	const {path, exact} = rest;
 
 	if (!isAuthenticated) {
-		const redirect = to => matchPath(to, {
-			path,
-			exact
-		}) ? children : <Redirect to={to}/>;
-
+		const redirect = to => matchPath(to, {path, exact}) ? children : <Redirect to={to}/>;
 		return redirect(loginPath);
 	}
 
