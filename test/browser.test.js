@@ -62,7 +62,7 @@ test('allows access to specified path if authenticated', t => {
 	t.true(wrapper.text().includes('ABOUT'));
 });
 
-test('redirects to /login if not authenticated', t => {
+test('redirects to `/login` if not authenticated', t => {
 	const {BrowserRouter, AuthenticatedRoute, history} = require('../');
 	history.location.pathname = '/test';
 	const BrowserComponent = props => (
@@ -158,7 +158,7 @@ test('AuthenticatedRoute allows access to nested routes in nested routing', t =>
 	t.true(wrapper.text().includes('DASHBOARD MAIN'));
 });
 
-test('AuthenticatedRoute matchPath positive allows access to loginPath as nested route', t => {
+test('AuthenticatedRoute `matchPath` positive allows access to `loginPath` as nested route', t => {
 	const {BrowserRouter, AuthenticatedRoute, history} = require('../');
 	history.location.pathname = '/dashboard/login';
 	const BrowserComponent = props => (
