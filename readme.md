@@ -1,4 +1,4 @@
-# react-router-util [![Build Status](https://travis-ci.org/sindresorhus/react-router-util.svg?branch=master)](https://travis-ci.org/sindresorhus/react-router-util)
+# react-router-util
 
 > Useful components and utilities for working with [React Router](https://github.com/ReactTraining/react-router)
 
