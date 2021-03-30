@@ -16,7 +16,7 @@
 	"scripts": {
 		"build": "babel index.js --out-dir=dist",
 		"test": "xo && ava",
-		"prepublishOnly": "npm run build"
+		"prepare": "npm run build"
 	},
 	"files": [
 		"dist"
