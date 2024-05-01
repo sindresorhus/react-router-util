@@ -4,18 +4,24 @@
 	"description": "Useful components and utilities for working with React Router",
 	"license": "MIT",
 	"repository": "sindresorhus/react-router-util",
+	"funding": "https://github.com/sponsors/sindresorhus",
 	"author": {
 		"name": "Sindre Sorhus",
 		"email": "sindresorhus@gmail.com",
-		"url": "sindresorhus.com"
+		"url": "https://sindresorhus.com"
 	},
-	"main": "./dist/index.js",
+	"type": "module",
+	"exports": {
+		"types": "./dist/index.d.ts",
+		"default": "./dist/index.js"
+	},
+	"sideEffects": false,
 	"engines": {
-		"node": ">=8"
+		"node": ">=20"
 	},
 	"scripts": {
-		"build": "babel index.js --out-dir=dist",
-		"test": "xo && ava",
+		"build": "tsc",
+		"test": "npm run build && xo && tsx --test --tsconfig tsconfig.test.json test/*.test.tsx",
 		"prepare": "npm run build"
 	},
 	"files": [
@@ -40,69 +46,49 @@
 		"helpers"
 	],
 	"dependencies": {
-		"prop-types": "^15.6.0"
+		"history": "^5.3.0"
 	},
 	"devDependencies": {
-		"@babel/cli": "^7.5.0",
-		"@babel/plugin-transform-modules-commonjs": "^7.5.0",
-		"@babel/preset-env": "^7.5.4",
-		"@babel/preset-react": "^7.0.0",
-		"@babel/register": "^7.4.4",
-		"ava": "^2.2.0",
-		"babel-eslint": "^10.0.1",
-		"babel-preset-env": "^1.6.1",
-		"babel-preset-react": "^6.24.1",
-		"enzyme": "^3.9.0",
-		"enzyme-adapter-react-16": "^1.11.2",
-		"eslint-config-xo-react": "^0.20.0",
-		"eslint-plugin-react": "^7.14.2",
-		"eslint-plugin-react-hooks": "^1.6.1",
-		"jsdom": "^15.1.1",
-		"react": "^16.8.6",
-		"react-dom": "^16.8.6",
-		"react-router-dom": "^5.0.1",
-		"xo": "^0.24.0"
+		"@sindresorhus/tsconfig": "^8.0.1",
+		"@testing-library/react": "^16.3.0",
+		"@testing-library/user-event": "^14.6.1",
+		"@types/node": "^24.3.1",
+		"@types/react": "^19.1.12",
+		"@types/react-dom": "^19.1.9",
+		"eslint-config-xo-react": "^0.27.0",
+		"eslint-config-xo-typescript": "^3.0.0",
+		"eslint-plugin-react": "^7.37.5",
+		"eslint-plugin-react-hooks": "^5.2.0",
+		"global-jsdom": "^26.0.0",
+		"jsdom": "^26.1.0",
+		"react": "^19.1.1",
+		"react-dom": "^19.1.1",
+		"react-router-dom": "^7.8.2",
+		"tsx": "^4.20.5",
+		"typescript": "^5.9.2",
+		"xo": "^0.59.3"
 	},
 	"peerDependencies": {
-		"react": ">=16.8",
-		"react-router-dom": ">=5"
+		"react": ">=19",
+		"react-router-dom": ">=7"
 	},
 	"xo": {
 		"envs": [
 			"node",
 			"browser"
 		],
-		"parser": "babel-eslint",
 		"extends": [
-			"xo-react"
+			"xo-react",
+			"xo-typescript"
+		],
+		"extensions": [
+			"ts",
+			"tsx"
 		],
 		"rules": {
-			"import/no-unresolved": "off",
-			"import/no-extraneous-dependencies": "off",
-			"ava/no-ignored-test-files": "off",
-			"unicorn/import-index": "off",
-			"react/prop-types": "off",
-			"react/require-default-props": "off"
+			"@typescript-eslint/indent": "off",
+			"unicorn/expiring-todo-comments": "off",
+			"n/no-unsupported-features/node-builtins": "off"
 		}
-	},
-	"ava": {
-		"files": [
-			"!test/fixtures/**/*",
-			"!test/helpers/**/*"
-		],
-		"require": [
-			"@babel/register",
-			"./test/helpers/setup-browser-env.js",
-			"./test/helpers/setup-enzyme.js"
-		]
-	},
-	"babel": {
-		"plugins": [
-			"@babel/plugin-transform-modules-commonjs"
-		],
-		"presets": [
-			"@babel/preset-env",
-			"@babel/preset-react"
-		]
 	}
 }

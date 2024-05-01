@@ -2,13 +2,11 @@
 
 > Useful components and utilities for working with [React Router](https://github.com/ReactTraining/react-router)
 
-
 ## Install
 
+```sh
+npm install react-router-util
 ```
-$ npm install react-router-util
-```
-
 
 ## Usage
 
@@ -40,7 +38,6 @@ const App = () => (
 	</Router>
 );
 ```
-
 
 ## API
 
@@ -167,7 +164,6 @@ Like [`<Link>`](https://github.com/ReactTraining/react-router/blob/master/packag
 ### `<ForwardLink>`
 
 Like [`<Link>`](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/api/Link.md), but navigates to the next route in the history. Accepts any props `<Link>` supports except for `to`.
-
 
 ## Related
 
